@@ -53,9 +53,9 @@ function Stopwatch() {
     dispatch(start());
   };
 
-  const handleStop = () => {
-    dispatch(stop());
-  };
+  // const handleStop = () => {
+  //   dispatch(stop());
+  // };
 
   const handleReset = () => {
     dispatch(reset(setup.duration * 60));
@@ -72,7 +72,7 @@ function Stopwatch() {
   return (
     <div className="flex flex-row items-center justify-between md:w-[26rem] bg-cardMain py-7 px-8 gap-10 rounded-2xl shadow-md">
       <h1 className="text-7xl font-semibold">{formatTime(time)}</h1>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <button
           className="hover:bg-black hover:text-white bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
           type="button"
@@ -82,15 +82,7 @@ function Stopwatch() {
           Start
         </button>
         <button
-          className="hover:bg-red-500 hover:text-bgColor bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
-          type="button"
-          onClick={handleStop}
-          disabled={!isRunning}
-        >
-          Stop
-        </button>
-        <button
-          className="hover:bg-green-400 bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
+          className="hover:bg-red-400 bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
           type="button"
           onClick={handleReset}
         >
