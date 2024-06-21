@@ -6,6 +6,7 @@ import {
   setTitle,
   setDuration,
 } from '../features/setup/setupSlice';
+import { updateTime } from '../features/stopwatch/stopwatchSlice';
 
 function Setup() {
   const dispatch = useDispatch();
@@ -24,7 +25,9 @@ function Setup() {
   };
 
   const handleDurationChange = (e) => {
-    dispatch(setDuration(Number(e.target.value)));
+    const duration = Number(e.target.value);
+    dispatch(setDuration(duration));
+    dispatch(updateTime(duration * 60));
   };
 
   return (

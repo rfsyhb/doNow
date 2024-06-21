@@ -23,8 +23,11 @@ const stopwatchSlice = createSlice({
       state.time = action.payload;
       state.isRunning = false;
     },
+    updateTime: (state, action) => {
+      state.time = action.payload;
+    },
   },
 });
 
-export const { start, stop, tick, reset } = stopwatchSlice.actions;
+export const { start, stop, tick, reset, updateTime } = stopwatchSlice.actions;
 export default stopwatchSlice.reducer;

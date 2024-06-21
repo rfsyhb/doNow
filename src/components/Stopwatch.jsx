@@ -42,6 +42,12 @@ function Stopwatch() {
     }
   }, [time, isRunning, dispatch, setup]);
 
+  useEffect(() => {
+    if (!isRunning) {
+      dispatch(reset(setup.duration * 60)); // update waktu
+    }
+  }, [dispatch, isRunning, setup.duration]);
+
   const handleStart = () => {
     dispatch(reset(setup.duration * 60)); // Mengatur ulang sesuai durasi di pengaturan
     dispatch(start());
