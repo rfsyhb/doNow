@@ -74,7 +74,7 @@ function Stopwatch() {
       <h1 className="text-7xl font-semibold">{formatTime(time)}</h1>
       <div className="flex flex-col gap-3">
         <button
-          className="hover:bg-black hover:text-white bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
+          className={`hover:bg-black hover:text-white ${isRunning ? 'bg-black text-white' : 'bg-white text-black '} font-semibold p-[0.1rem] px-4 rounded-lg border border-black`}
           type="button"
           onClick={handleStart}
           disabled={isRunning}
