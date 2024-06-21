@@ -31,43 +31,72 @@ function Setup() {
   };
 
   return (
-    <div>
-      <label htmlFor="webhook">
-        Discord Webhook URL:
-        <input
-          id="webhook"
-          type="text"
-          value={setup.webhookUrl}
-          onChange={handleWebhookUrlChange}
-        />
-      </label>
-      <label htmlFor="enableDiscord">
-        Enable Discord Notifications:
-        <input
-          id="enableDiscord"
-          type="checkbox"
-          checked={setup.discordEnabled}
-          onChange={handleDiscordEnabledChange}
-        />
-      </label>
-      <label htmlFor="title">
-        Title:
-        <input
-          id="title"
-          type="text"
-          value={setup.title}
-          onChange={handleTitleChange}
-        />
-      </label>
-      <label htmlFor="duration">
-        Duration (minutes):
-        <input
-          id="duration"
-          type="number"
-          value={setup.duration}
-          onChange={handleDurationChange}
-        />
-      </label>
+    <div className="flex flex-col gap-4 bg-cardMain p-6 rounded-xl border border-black border-opacity-20">
+      <div className="flex flex-row gap-4 justify-between">
+        <div className="flex flex-row">
+          <h1 className="font-semibold text-2xl">Pomodoro</h1>
+          <p className="text-sm">by limau</p>
+        </div>
+        <div className="flex flex-col text-right gap-2">
+          <label
+            htmlFor="enableDiscord"
+            className="font-semibold flex items-center gap-4 px-2 self-end border border-black border-opacity-30 rounded-lg justify-between"
+          >
+            Discord
+            <div className="relative">
+              <input
+                id="enableDiscord"
+                type="checkbox"
+                checked={setup.discordEnabled}
+                onChange={handleDiscordEnabledChange}
+                className="sr-only"
+              />
+              <div
+                className={`block  w-8 h-4 rounded-full ${setup.discordEnabled ? 'bg-black' : 'bg-gray-400'}`}
+              />
+              <div
+                className={`dot absolute left-0 top-0 bg-white w-4 h-4 border border-gray-400 rounded-full transition ${
+                  setup.discordEnabled ? 'transform translate-x-4' : ''
+                }`}
+              />
+            </div>
+          </label>
+          <label htmlFor="webhook">
+            <input
+              id="webhook"
+              type="text"
+              value={setup.webhookUrl}
+              onChange={handleWebhookUrlChange}
+              className="rounded-md px-2"
+              placeholder="webhook url"
+            />
+          </label>
+        </div>
+      </div>
+
+      <div className="flex flex-row gap-4">
+        <label htmlFor="title" className="w-[80%] flex flex-col">
+          <span className="text-sm pl-2">title?</span>
+          <input
+            id="title"
+            type="text"
+            value={setup.title}
+            onChange={handleTitleChange}
+            className="rounded-md px-2"
+            placeholder="berak"
+          />
+        </label>
+        <label htmlFor="duration" className="w-[20%] flex flex-col">
+          <span className="text-sm pl-2">how long?</span>
+          <input
+            id="duration"
+            type="number"
+            value={setup.duration}
+            onChange={handleDurationChange}
+            className="rounded-md px-2"
+          />
+        </label>
+      </div>
     </div>
   );
 }
