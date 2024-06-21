@@ -11,7 +11,7 @@ function History() {
   const todayDate = `${day} ${month} ${year}`;
 
   return (
-    <div className="flex flex-col bg-cardMain p-4 rounded-xl border border-black border-opacity-20">
+    <div className="min-w-96 flex flex-col bg-cardMain p-4 rounded-xl border border-black border-opacity-20">
       <div className="flex flex-row items-center justify-between px-10 pb-3">
         <h2 className="text-xl font-semibold">History</h2>
         <p className="text-sm">{todayDate}</p>
