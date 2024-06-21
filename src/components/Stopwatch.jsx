@@ -70,7 +70,7 @@ function Stopwatch() {
   };
 
   return (
-    <div className="flex flex-row items-center justify-between w-[40vh] bg-cardMain py-7 px-8 gap-10 rounded-2xl shadow-md">
+    <div className="flex flex-row items-center justify-between w-[26rem] bg-cardMain py-7 px-8 gap-10 rounded-2xl shadow-md">
       <h1 className="text-7xl font-semibold">{formatTime(time)}</h1>
       <div className="flex flex-col gap-2">
         <button
