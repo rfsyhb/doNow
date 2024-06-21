@@ -70,17 +70,33 @@ function Stopwatch() {
   };
 
   return (
-    <div className="">
-      <h1>{formatTime(time)}</h1>
-      <button type="button" onClick={handleStart} disabled={isRunning}>
-        Start
-      </button>
-      <button type="button" onClick={handleStop} disabled={!isRunning}>
-        Stop
-      </button>
-      <button type="button" onClick={handleReset}>
-        Reset
-      </button>
+    <div className="flex flex-row items-center justify-between w-[40vh] bg-cardMain py-7 px-8 gap-10 rounded-2xl shadow-md">
+      <h1 className="text-7xl font-semibold">{formatTime(time)}</h1>
+      <div className="flex flex-col gap-2">
+        <button
+          className="bg-black text-bgColor font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
+          type="button"
+          onClick={handleStart}
+          disabled={isRunning}
+        >
+          Start
+        </button>
+        <button
+          className="bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
+          type="button"
+          onClick={handleStop}
+          disabled={!isRunning}
+        >
+          Stop
+        </button>
+        <button
+          className="bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
+          type="button"
+          onClick={handleReset}
+        >
+          Reset
+        </button>
+      </div>
     </div>
   );
 }
