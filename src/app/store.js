@@ -1,9 +1,15 @@
 /* eslint-disable */
 import { configureStore } from '@reduxjs/toolkit';
-import timerReducer from '../features/timer/timerSlice';
+import stopwatchReducer from '../features/stopwatch/stopwatchSlice';
+import historyReducer from '../features/history/historySlice';
+import setupReducer from '../features/setup/setupSlice';
 
 export const store = configureStore({
   reducer: {
-    timer: timerReducer,
+    stopwatch: stopwatchReducer,
+    history: historyReducer,
+    setup: setupReducer,
   },
 });
+
+export default store;
