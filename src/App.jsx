@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loadHistoryFromLocalStorage } from './features/history/historySlice';
+import { clearOldHistory } from './utils/helper';
 import Stopwatch from './components/Stopwatch';
 import Settings from './components/Setup';
 import History from './components/History';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    clearOldHistory();
+    dispatch(loadHistoryFromLocalStorage());
+  }, [dispatch]);
+
   const [page, setPage] = useState('main');
 
   return (
