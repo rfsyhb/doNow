@@ -61,6 +61,9 @@ const timerSlice = createSlice({
       state.minutes = '';
       state.isCompleted = false;
     },
+    setIsCompleted: (state, action) => {
+      state.isCompleted = action.payload;
+    },
   },
 });
 
@@ -74,29 +77,33 @@ export const {
   addHistory,
   tick,
   reset,
+  setIsCompleted,
 } = timerSlice.actions;
 
 // Thunk untuk memulai timer
 export const startTimer = createAsyncThunk(
   'timer/startTimer',
   async (_, { dispatch, getState }) => {
-    const intervalId = setInterval(() => {
+    const { time, isActive, title, minutes, webhookUrl, isCompleted } =
+      getState().timer;
+
+    if (isActive && time > 0) {
       dispatch(tick());
-      const { time, isActive, title, minutes, webhookUrl } = getState().timer;
-      if (!isActive || time === 0) {
-        clearInterval(intervalId);
-        if (time === 0) {
-          dispatch(addHistory({ title, time: minutes }));
-          dispatch(
-            sendToDiscordThunk({
-              title,
-              time: minutes,
-              webhookUrl,
-            })
-          );
-        }
+    }
+
+    if (!isActive || time === 0) {
+      if (time === 0 && !isCompleted) {
+        dispatch(addHistory({ title, time: minutes }));
+        dispatch(
+          sendToDiscordThunk({
+            title,
+            time: minutes,
+            webhookUrl,
+          })
+        );
+        dispatch(setIsCompleted(true));
       }
-    }, 1000);
+    }
   }
 );
 
