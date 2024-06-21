@@ -35,7 +35,11 @@ function Setup() {
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between">
         <div className="flex flex-row">
           <h1 className="font-semibold text-2xl">Stopwatch</h1>
-          <p className="text-sm">by limau</p>
+          <p className="text-sm">
+            <a href="https://github.com/rfsyhb" target="_blank">
+              <span className="text-blue-500">by limau</span>
+            </a>
+          </p>
         </div>
         <div className="flex md:flex-col flex-row text-right gap-2">
           <label
