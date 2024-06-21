@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { sendToDiscord } from '../../api';
 
+// Initial state
 const initialState = {
   time: 0,
   isActive: false,
@@ -8,8 +10,19 @@ const initialState = {
   minutes: '',
   webhookUrl: '',
   history: [],
+  isCompleted: false,
 };
 
+// Thunk send webhook
+export const sendToDiscordThunk = createAsyncThunk(
+  'timer/sendToDiscord',
+  async ({ title, time, webhookUrl }) => {
+    const message = `Completed: ${title} ${time}min`;
+    await sendToDiscord(message, webhookUrl);
+  }
+);
+
+// Slice
 const timerSlice = createSlice({
   name: 'timer',
   initialState,
@@ -27,7 +40,7 @@ const timerSlice = createSlice({
       state.minutes = action.payload;
     },
     setWebhookURL: (state, action) => {
-      state.webhookURL = action.payload;
+      state.webhookUrl = action.payload;
     },
     addHistory: (state, action) => {
       state.history.push(action.payload);
@@ -38,6 +51,7 @@ const timerSlice = createSlice({
       }
       if (state.isActive && state.time === 0) {
         state.isActive = false;
+        state.isCompleted = true;
       }
     },
     reset: (state) => {
@@ -45,10 +59,12 @@ const timerSlice = createSlice({
       state.isActive = false;
       state.title = '';
       state.minutes = '';
+      state.isCompleted = false;
     },
   },
 });
 
+// Export actions
 export const {
   setTime,
   setActive,
@@ -59,5 +75,29 @@ export const {
   tick,
   reset,
 } = timerSlice.actions;
+
+// Thunk untuk memulai timer
+export const startTimer = createAsyncThunk(
+  'timer/startTimer',
+  async (_, { dispatch, getState }) => {
+    const intervalId = setInterval(() => {
+      dispatch(tick());
+      const { time, isActive, title, minutes, webhookUrl } = getState().timer;
+      if (!isActive || time === 0) {
+        clearInterval(intervalId);
+        if (time === 0) {
+          dispatch(addHistory({ title, time: minutes }));
+          dispatch(
+            sendToDiscordThunk({
+              title,
+              time: minutes,
+              webhookUrl,
+            })
+          );
+        }
+      }
+    }, 1000);
+  }
+);
 
 export default timerSlice.reducer;
