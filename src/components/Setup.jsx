@@ -84,6 +84,7 @@ function Setup() {
             onChange={handleTitleChange}
             className="rounded-md px-2"
             placeholder="berak"
+            maxLength="25"
           />
         </label>
         <label htmlFor="duration" className="w-[20%] flex flex-col">
