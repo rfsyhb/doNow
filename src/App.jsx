@@ -10,21 +10,21 @@ function App() {
     <div className="flex flex-col justify-center h-[100vh] items-center">
       <nav className="flex flex-row gap-3 mb-[1rem]">
         <button
-          className={`p-1 px-4 border border-black rounded-xl font-semibold ${page === 'main' ? 'bg-black text-bgColor' : 'bg-none'}`}
+          className={`shadow-md p-1 px-4 border border-black rounded-xl font-semibold ${page === 'main' ? 'bg-black text-bgColor' : 'bg-none'}`}
           type="button"
           onClick={() => setPage('main')}
         >
           Main
         </button>
         <button
-          className={`p-1 px-4 border border-black rounded-xl font-semibold ${page === 'setting' ? 'bg-black text-bgColor' : 'bg-none'}`}
+          className={`shadow-md p-1 px-4 border border-black rounded-xl font-semibold ${page === 'setting' ? 'bg-black text-bgColor' : 'bg-none'}`}
           type="button"
           onClick={() => setPage('setting')}
         >
           Setting
         </button>
         <button
-          className={`p-1 px-4 border border-black rounded-xl font-semibold ${page === 'history' ? 'bg-black text-bgColor' : 'bg-none'}`}
+          className={`shadow-md p-1 px-4 border border-black rounded-xl font-semibold ${page === 'history' ? 'bg-black text-bgColor' : 'bg-none'}`}
           type="button"
           onClick={() => setPage('history')}
         >

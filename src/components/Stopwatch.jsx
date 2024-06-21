@@ -74,7 +74,7 @@ function Stopwatch() {
       <h1 className="text-7xl font-semibold">{formatTime(time)}</h1>
       <div className="flex flex-col gap-2">
         <button
-          className="bg-black text-bgColor font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
+          className="hover:bg-black hover:text-white bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
           type="button"
           onClick={handleStart}
           disabled={isRunning}
@@ -82,7 +82,7 @@ function Stopwatch() {
           Start
         </button>
         <button
-          className="bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
+          className="hover:bg-red-500 hover:text-bgColor bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
           type="button"
           onClick={handleStop}
           disabled={!isRunning}
@@ -90,7 +90,7 @@ function Stopwatch() {
           Stop
         </button>
         <button
-          className="bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
+          className="hover:bg-green-400 bg-white text-black font-semibold p-[0.1rem] px-4 rounded-lg border border-black"
           type="button"
           onClick={handleReset}
         >
