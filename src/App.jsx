@@ -7,7 +7,7 @@ function App() {
   const [page, setPage] = useState('main');
 
   return (
-    <div>
+    <div className="bg-blue-500 flex flex-col justify-center h-[100vh] items-center">
       <nav>
         <button type="button" onClick={() => setPage('main')}>
           Main

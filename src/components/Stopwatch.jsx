@@ -70,7 +70,7 @@ function Stopwatch() {
   };
 
   return (
-    <div>
+    <div className="">
       <h1>{formatTime(time)}</h1>
       <button type="button" onClick={handleStart} disabled={isRunning}>
         Start
