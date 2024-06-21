@@ -8,22 +8,32 @@ function App() {
 
   return (
     <div className="flex flex-col justify-center h-[100vh] items-center">
-      <nav>
-        <button type="button" onClick={() => setPage('main')}>
+      <nav className="flex flex-row gap-3 mb-[1rem]">
+        <button
+          className={`p-1 px-4 border border-black rounded-xl font-semibold ${page === 'main' ? 'bg-black text-bgColor' : 'bg-none'}`}
+          type="button"
+          onClick={() => setPage('main')}
+        >
           Main
         </button>
-        <button type="button" onClick={() => setPage('settings')}>
-          Settings
+        <button
+          className={`p-1 px-4 border border-black rounded-xl font-semibold ${page === 'setting' ? 'bg-black text-bgColor' : 'bg-none'}`}
+          type="button"
+          onClick={() => setPage('setting')}
+        >
+          Setting
         </button>
-        <button type="button" onClick={() => setPage('history')}>
+        <button
+          className={`p-1 px-4 border border-black rounded-xl font-semibold ${page === 'history' ? 'bg-black text-bgColor' : 'bg-none'}`}
+          type="button"
+          onClick={() => setPage('history')}
+        >
           History
         </button>
       </nav>
-      <div>
-        {page === 'main' && <Stopwatch />}
-        {page === 'settings' && <Settings />}
-        {page === 'history' && <History />}
-      </div>
+      {page === 'main' && <Stopwatch />}
+      {page === 'setting' && <Settings />}
+      {page === 'history' && <History />}
     </div>
   );
 }
