@@ -32,12 +32,12 @@ function Setup() {
 
   return (
     <div className="flex flex-col gap-4 bg-cardMain p-6 rounded-xl border border-black border-opacity-20">
-      <div className="flex flex-row gap-4 justify-between">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between">
         <div className="flex flex-row">
-          <h1 className="font-semibold text-2xl">Pomodoro</h1>
+          <h1 className="font-semibold text-2xl">Stopwatch</h1>
           <p className="text-sm">by limau</p>
         </div>
-        <div className="flex flex-col text-right gap-2">
+        <div className="flex md:flex-col flex-row text-right gap-2">
           <label
             htmlFor="enableDiscord"
             className="font-semibold flex items-center gap-4 px-2 self-end border border-black border-opacity-30 rounded-lg justify-between"
@@ -52,7 +52,7 @@ function Setup() {
                 className="sr-only"
               />
               <div
-                className={`block  w-8 h-4 rounded-full ${setup.discordEnabled ? 'bg-black' : 'bg-gray-400'}`}
+                className={`block w-8 h-4 rounded-full ${setup.discordEnabled ? 'bg-black' : 'bg-gray-400'}`}
               />
               <div
                 className={`dot absolute left-0 top-0 bg-white w-4 h-4 border border-gray-400 rounded-full transition ${
@@ -67,15 +67,16 @@ function Setup() {
               type="text"
               value={setup.webhookUrl}
               onChange={handleWebhookUrlChange}
-              className="rounded-md px-2"
+              className="rounded-md px-2 w-full sm:w-auto"
               placeholder="webhook url"
+              disabled={!setup.discordEnabled}
             />
           </label>
         </div>
       </div>
 
-      <div className="flex flex-row gap-4">
-        <label htmlFor="title" className="w-[80%] flex flex-col">
+      <div className="flex flex-col sm:flex-row gap-4">
+        <label htmlFor="title" className="w-full sm:w-[80%] flex flex-col">
           <span className="text-sm pl-2">title?</span>
           <input
             id="title"
@@ -87,7 +88,7 @@ function Setup() {
             maxLength="25"
           />
         </label>
-        <label htmlFor="duration" className="w-[20%] flex flex-col">
+        <label htmlFor="duration" className="w-full sm:w-[20%] flex flex-col">
           <span className="text-sm pl-2">how long?</span>
           <input
             id="duration"
