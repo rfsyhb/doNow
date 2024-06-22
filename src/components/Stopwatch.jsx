@@ -32,7 +32,7 @@ function Stopwatch() {
       if (setup.discordEnabled && setup.webhookUrl) {
         axios
           .post(setup.webhookUrl, {
-            content: `finished, "${historyItem.title}" - ${historyItem.time} min. [${timeNow}] [${todayDate}]`,
+            content: `[${timeNow}] [${todayDate}], "${historyItem.title}" - ${historyItem.time} min, finished.`,
           })
           .then(() => {
             console.log('Posted to Discord');
