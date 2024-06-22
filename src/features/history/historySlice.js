@@ -12,6 +12,11 @@ const saveHistory = (history) => {
   localStorage.setItem(todayKey, JSON.stringify(history));
 };
 
+const clearHistoryFromLocalStorage = () => {
+  const todayKey = getTodayDateKey();
+  localStorage.removeItem(todayKey);
+};
+
 const historySlice = createSlice({
   name: 'history',
   initialState: loadHistory(),
@@ -23,8 +28,13 @@ const historySlice = createSlice({
     loadHistoryFromLocalStorage: () => {
       return loadHistory();
     },
+    clearHistory: () => {
+      clearHistoryFromLocalStorage();
+      return [];
+    },
   },
 });
 
-export const { addHistory, loadHistoryFromLocalStorage } = historySlice.actions;
+export const { addHistory, loadHistoryFromLocalStorage, clearHistory } =
+  historySlice.actions;
 export default historySlice.reducer;
