@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* eslint-disable no-alert */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -51,8 +52,12 @@ function Stopwatch() {
   }, [dispatch, isRunning, setup.duration]);
 
   const handleStart = () => {
-    dispatch(reset(setup.duration * 60)); // Mengatur ulang sesuai durasi di pengaturan
-    dispatch(start());
+    if (setup.title.length > 0) {
+      dispatch(reset(setup.duration * 60)); // Mengatur ulang sesuai durasi di pengaturan
+      dispatch(start());
+    } else {
+      alert('u forgor to add title!');
+    }
   };
 
   // const handleStop = () => {
