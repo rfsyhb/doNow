@@ -4,12 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { start, stop, tick, reset } from '../features/stopwatch/stopwatchSlice';
 import { addHistory } from '../features/history/historySlice';
+import useDateTime from '../hooks/useDateTime';
 
 function Stopwatch() {
   const dispatch = useDispatch();
   const time = useSelector((state) => state.stopwatch.time);
   const isRunning = useSelector((state) => state.stopwatch.isRunning);
   const setup = useSelector((state) => state.setup);
+  const { todayDate, timeNow } = useDateTime();
 
   useEffect(() => {
     let interval;
@@ -30,7 +32,7 @@ function Stopwatch() {
       if (setup.discordEnabled && setup.webhookUrl) {
         axios
           .post(setup.webhookUrl, {
-            content: `Pomodoro "${historyItem.title}" finished in ${historyItem.time} minutes.`,
+            content: `finished, "${historyItem.title}" - ${historyItem.time} min. [${timeNow}] [${todayDate}]`,
           })
           .then(() => {
             console.log('Posted to Discord');
@@ -40,7 +42,7 @@ function Stopwatch() {
           });
       }
     }
-  }, [time, isRunning, dispatch, setup]);
+  }, [time, isRunning, dispatch, setup, timeNow, todayDate]);
 
   useEffect(() => {
     if (!isRunning) {

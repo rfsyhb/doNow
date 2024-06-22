@@ -1,14 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { useSelector } from 'react-redux';
+import useDateTime from '../hooks/useDateTime';
 
 function History() {
   const history = useSelector((state) => state.history);
-  const date = new Date();
-  const day = date.getDate();
-  const month = date.toLocaleString('default', { month: 'long' });
-  const year = date.getFullYear();
-  const todayDate = `${day} ${month} ${year}`;
+  const { todayDate } = useDateTime();
 
   return (
     <div className="min-w-96 flex flex-col bg-cardMain p-4 rounded-xl border border-black border-opacity-20">
