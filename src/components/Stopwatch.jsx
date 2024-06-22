@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { start, stop, tick, reset } from '../features/stopwatch/stopwatchSlice';
@@ -13,16 +13,33 @@ function Stopwatch() {
   const isRunning = useSelector((state) => state.stopwatch.isRunning);
   const setup = useSelector((state) => state.setup);
   const { todayDate, timeNow } = useDateTime();
+  const workerRef = useRef(null);
 
   useEffect(() => {
-    let interval;
-    if (isRunning) {
-      interval = setInterval(() => {
+    workerRef.current = new Worker(
+      new URL('../utils/timerWorker.js', import.meta.url)
+    );
+
+    workerRef.current.onmessage = (event) => {
+      if (event.data === 'tick') {
         dispatch(tick());
-      }, 1000);
+      } else if (event.data.type === 'reset') {
+        dispatch(reset(event.data.time));
+      }
+    };
+
+    return () => {
+      workerRef.current.terminate();
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isRunning) {
+      workerRef.current.postMessage({ type: 'start' });
+    } else {
+      workerRef.current.postMessage({ type: 'stop' });
     }
-    return () => clearInterval(interval);
-  }, [isRunning, dispatch]);
+  }, [isRunning]);
 
   useEffect(() => {
     if (time === 0 && isRunning) {
@@ -66,6 +83,7 @@ function Stopwatch() {
 
   const handleReset = () => {
     dispatch(reset(setup.duration * 60));
+    workerRef.current.postMessage({ type: 'reset', duration: setup.duration });
   };
 
   const formatTime = (seconds) => {
