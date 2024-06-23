@@ -5,6 +5,8 @@ const setupSlice = createSlice({
   name: 'settings',
   initialState: {
     webhookUrl: '',
+    webhookReminderUrl: '',
+    usernameReminder: '',
     discordEnabled: false,
     title: '',
     duration: 25, // default duration in minutes
@@ -12,6 +14,12 @@ const setupSlice = createSlice({
   reducers: {
     setWebhookUrl: (state, action) => {
       state.webhookUrl = action.payload;
+    },
+    setWebhookReminderUrl: (state, action) => {
+      state.webhookReminderUrl = action.payload;
+    },
+    setUsernameReminder: (state, action) => {
+      state.usernameReminder = action.payload;
     },
     setDiscordEnabled: (state, action) => {
       state.discordEnabled = action.payload;
@@ -25,6 +33,12 @@ const setupSlice = createSlice({
   },
 });
 
-export const { setWebhookUrl, setDiscordEnabled, setTitle, setDuration } =
-  setupSlice.actions;
+export const {
+  setWebhookUrl,
+  setWebhookReminderUrl,
+  setUsernameReminder,
+  setDiscordEnabled,
+  setTitle,
+  setDuration,
+} = setupSlice.actions;
 export default setupSlice.reducer;

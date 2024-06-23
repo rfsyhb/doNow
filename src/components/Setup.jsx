@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setWebhookUrl,
+  setWebhookReminderUrl,
+  setUsernameReminder,
   setDiscordEnabled,
   setTitle,
   setDuration,
@@ -14,6 +16,14 @@ function Setup() {
 
   const handleWebhookUrlChange = (e) => {
     dispatch(setWebhookUrl(e.target.value));
+  };
+
+  const handleWebhookReminderUrlChange = (e) => {
+    dispatch(setWebhookReminderUrl(e.target.value));
+  };
+
+  const handleUsernameReminderChange = (e) => {
+    dispatch(setUsernameReminder(e.target.value));
   };
 
   const handleDiscordEnabledChange = (e) => {
@@ -65,17 +75,41 @@ function Setup() {
               />
             </div>
           </label>
-          <label htmlFor="webhook">
-            <input
-              id="webhook"
-              type="text"
-              value={setup.webhookUrl}
-              onChange={handleWebhookUrlChange}
-              className="rounded-md px-2 w-full sm:w-auto"
-              placeholder="webhook url"
-              disabled={!setup.discordEnabled}
-            />
-          </label>
+          <div className="flex flex-row gap-2">
+            <label htmlFor="webhook">
+              <input
+                id="webhook"
+                type="text"
+                value={setup.webhookUrl}
+                onChange={handleWebhookUrlChange}
+                className="rounded-md px-2 w-16"
+                placeholder="main"
+                disabled={!setup.discordEnabled}
+              />
+            </label>
+            <label htmlFor="webhookReminder">
+              <input
+                id="webhookReminder"
+                type="text"
+                value={setup.webhookReminderUrl}
+                onChange={handleWebhookReminderUrlChange}
+                className="rounded-md px-2 w-16"
+                placeholder="spam"
+                disabled={!setup.discordEnabled}
+              />
+            </label>
+            <label htmlFor="usernameReminder">
+              <input
+                id="usernameReminder"
+                type="text"
+                value={setup.usernameReminder}
+                onChange={handleUsernameReminderChange}
+                className="rounded-md px-2 w-16"
+                placeholder="UID"
+                disabled={!setup.discordEnabled}
+              />
+            </label>
+          </div>
         </div>
       </div>
 
