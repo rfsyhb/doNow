@@ -6,6 +6,7 @@ const stopwatchSlice = createSlice({
   initialState: {
     time: 1500, // 25 menit dalam detik
     isRunning: false,
+    isReminding: false,
   },
   reducers: {
     start: (state) => {
@@ -13,6 +14,12 @@ const stopwatchSlice = createSlice({
     },
     stop: (state) => {
       state.isRunning = false;
+    },
+    startRemind: (state) => {
+      state.isReminding = true;
+    },
+    stopRemind: (state) => {
+      state.isReminding = false;
     },
     tick: (state) => {
       if (state.isRunning && state.time > 0) {
@@ -29,5 +36,6 @@ const stopwatchSlice = createSlice({
   },
 });
 
-export const { start, stop, tick, reset, updateTime } = stopwatchSlice.actions;
+export const { start, stop, startRemind, stopRemind, tick, reset, updateTime } =
+  stopwatchSlice.actions;
 export default stopwatchSlice.reducer;
