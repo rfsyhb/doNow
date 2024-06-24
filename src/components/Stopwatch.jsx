@@ -104,7 +104,7 @@ function Stopwatch() {
           .catch((error) => {
             console.error('Error sending reminder:', error);
           });
-      }, 8000);
+      }, 15000);
     }
 
     return () => {
